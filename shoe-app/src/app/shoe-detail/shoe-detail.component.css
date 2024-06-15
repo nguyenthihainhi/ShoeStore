@@ -1,0 +1,53 @@
+::ng-deep .carousel-indicators {
+  display: none;
+}
+.main-img {
+  height: 500px;
+  width: 100%;
+}
+.product-others {
+  height: 100px;
+  padding: 5px;
+}
+.product-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-width: 800px;
+}
+.color-wrapper ul,
+.size-wrapper ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.color-wrapper ul li,
+.size-wrapper ul li {
+  display: inline-block;
+  padding: 0 2px;
+}
+.color-wrapper ul li a,
+.size-wrapper ul li a {
+  text-decoration: none;
+  border: 1px solid rgba(112, 112, 112, 0.15);
+  font-size: 13px;
+  color: #000;
+  padding: 4px 8px;
+  display: inline-block;
+}
+.color-wrapper ul li a:hover,
+.color-wrapper ul li a:focus,
+.color-wrapper ul li a:active,
+.size-wrapper ul li a:hover,
+.size-wrapper ul li a:focus,
+.size-wrapper ul li a:active {
+  background-color: #8f6b6c;
+  color: #fff;
+  transition: all 0.3s ease-in;
+}
+.color-wrapper ul li.active a,
+.size-wrapper ul li.active a {
+  background-color: #8f6b6c;
+  color: #fff;
+}

@@ -1,0 +1,71 @@
+<div class="container m-5">
+  <div class="card p-4">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <img
+          class="img-fluid main-img"
+          [src]="'data:image/png;base64,' + curImgProduct"
+          alt=""
+        />
+        <carousel
+          [itemsPerSlide]="itemsPerSlide"
+          [singleSlideOffset]="singleSlideOffset"
+          [interval]="0"
+          [noWrap]="noWrap"
+        >
+          <slide *ngFor="let slide of slides; let index = index">
+            <div class="d-flex justify-content-between mt-2">
+              <img
+                [src]="'data:image/png;base64,' + slide"
+                alt="image slide"
+                class="product-others"
+                style="display: block; width: 100%"
+                (click)="changeImage(slide)"
+              />
+            </div>
+          </slide>
+        </carousel>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <p class="fw-bold fs-3 text-uppercase product-name">
+          {{ shoe.shoesName }}
+        </p>
+        <div class="rate text-danger">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <span class="fs-6 ms-2 text-black">(0 customer reviews)</span>
+        </div>
+        <p class="fs-2 fw-medium">$ {{ shoe.shoeDetails[0].price }}</p>
+        <p>
+          Nisi gravida arcu pellentesque feugiat in in proin sit aenean. Sociis
+          sit at semper non eget. Ultrices sollicitudin eget etiam tellus lorem
+          tortor platea donec. Id sed mattis accumsan blandit pretium
+          suspendisse.
+        </p>
+        <h3 class="fw-light mt-4">Colors</h3>
+        <div class="color-wrapper d-flex justify-content-start">
+          <ul *ngFor="let detail of shoe.shoeDetails">
+            <li>
+              <a href="#">{{ detail.color }}</a>
+            </li>
+          </ul>
+        </div>
+        <h3 class="fw-light mt-4">Size</h3>
+        <div class="size-wrapper d-flex justify-content-start">
+          <ul *ngFor="let detail of shoe.shoeDetails">
+            <li>
+              <a href="#">{{ detail.size }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="mt-4 d-flex justify-content-start">
+          <h3 class="fw-light me-5">Quantity:</h3>
+          <h3 class="fw-medium">{{ shoe.quantity }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

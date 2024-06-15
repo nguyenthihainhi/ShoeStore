@@ -1,0 +1,278 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="d-flex justify-content-between">
+      <h2>Shoe List</h2>
+      <button class="btn btn-success" (click)="openInformation(lgModal)">
+        Create New
+      </button>
+    </div>
+    <div
+      bsModal
+      #lgModal="bs-modal"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="dialog-sizes-name1"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-sizes-name1" class="modal-title pull-left">
+              Shoe Information
+            </h4>
+            <button
+              type="button"
+              class="btn-close close pull-right"
+              (click)="lgModal.hide()"
+              aria-label="Close"
+            >
+              <span aria-hidden="true" class="visually-hidden">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-5">
+            <div class="mb-3 row">
+              <label for="name" class="col-sm-3 col-form-label"
+                >Shoe Name</label
+              >
+              <div class="col-sm-9">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  placeholder="shoe's name"
+                  [(ngModel)]="shoe.shoesName"
+                />
+              </div>
+            </div>
+            <div *ngIf="editingShoeId != null">
+              <div class="mb-3 row">
+                <label for="image" class="col-sm-3 col-form-label">Image</label>
+                <div class="col-sm-9">
+                  <img
+                    class="p-2"
+                    [src]="'data:image/png;base64,' + shoe.imageRight"
+                    alt=""
+                  />
+                  <img
+                    class="p-2"
+                    [src]="'data:image/png;base64,' + shoe.imageLeft"
+                    alt=""
+                  />
+                  <img
+                    class="p-2"
+                    [src]="'data:image/png;base64,' + shoe.imageTop"
+                    alt=""
+                  />
+                  <img
+                    class="p-2"
+                    [src]="'data:image/png;base64,' + shoe.imageBottom"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <button class="btn btn-outline-primary" (click)="changeImage()">
+                Change Image' Shoe
+              </button>
+            </div>
+            <div *ngIf="editingShoeId == null || isChangeImage == true">
+              <div class="mb-3 row">
+                <label for="image-left" class="col-sm-3 col-form-label"
+                  >Image Left</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="image-left"
+                    [(ngModel)]="shoe.imageLeft"
+                    (change)="onFileSelected($event, 'imageLeft')"
+                  />
+                  <img
+                    class="img-preview"
+                    *ngIf="shoe.imageLeft"
+                    [src]="shoe.imageLeft"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="image-right" class="col-sm-3 col-form-label"
+                  >Image Right</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="image-right"
+                    [(ngModel)]="shoe.imageRight"
+                    (change)="onFileSelected($event, 'imageRight')"
+                  />
+                  <img
+                    class="img-preview"
+                    *ngIf="shoe.imageRight"
+                    [src]="shoe.imageRight"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="image-top" class="col-sm-3 col-form-label"
+                  >Image Top</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="image-top"
+                    [(ngModel)]="shoe.imageTop"
+                    (change)="onFileSelected($event, 'imageTop')"
+                  />
+                  <img
+                    class="img-preview"
+                    *ngIf="shoe.imageTop"
+                    [src]="shoe.imageTop"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="image-bottom" class="col-sm-3 col-form-label"
+                  >Image Bottom</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="image-bottom"
+                    [(ngModel)]="shoe.imageBottom"
+                    (change)="onFileSelected($event, 'imageBottom')"
+                  />
+                  <img
+                    class="img-preview"
+                    *ngIf="shoe.imageBottom"
+                    [src]="shoe.imageBottom"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <label for="quantity" class="col-sm-3 col-form-label"
+                  >Quantity</label
+                >
+                <div class="col-sm-9">
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="quantity"
+                    placeholder="quantity"
+                    [(ngModel)]="shoe.quantity"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="supplier" class="col-sm-3 col-form-label"
+                >Supplier</label
+              >
+              <div class="col-sm-9">
+                <select
+                  class="form-control"
+                  id="supplier"
+                  [(ngModel)]="selectedSupplier"
+                >
+                  <option value="" disabled selected>select supplier...</option>
+                  <option *ngFor="let sup of suppliers" [value]="sup.name">
+                    {{ sup.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="category" class="col-sm-3 col-form-label"
+                >Category</label
+              >
+              <div class="col-sm-9">
+                <select
+                  class="form-control"
+                  id="category"
+                  [(ngModel)]="selectedCategory"
+                >
+                  <option value="" disabled selected>select category...</option>
+                  <option
+                    *ngFor="let cate of categories"
+                    [value]="cate.categoryName"
+                  >
+                    {{ cate.categoryName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="brand" class="col-sm-3 col-form-label">Brand</label>
+              <div class="col-sm-9">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="brand"
+                  placeholder="Brand"
+                  [(ngModel)]="shoe.brand"
+                />
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <div class="col-sm-2"></div>
+              <div class="col-sm-10 d-flex justify-content-end">
+                <button class="btn btn-primary me-4" (click)="saveShoe()">
+                  Save
+                </button>
+                <button class="btn btn-danger" (click)="clearForm()">
+                  Clear
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-hover mt-3">
+      <thead class="table-primary">
+        <tr>
+          <th class="p-4">Shoe ID</th>
+          <th class="p-4">Image</th>
+          <th class="p-4">Shoe Name</th>
+          <th class="p-4">Quantity</th>
+          <th class="p-4">Supplier</th>
+          <th class="p-4">Import Date</th>
+          <th class="p-4">Brand</th>
+          <th class="p-4">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of shoes" [routerLink]="['/shoe', item.id]">
+          <td class="p-3">{{ item.id }}</td>
+          <td class="p-3">
+            <img [src]="'data:image/png;base64,' + item.imageRight" alt="" />
+          </td>
+          <td class="p-3">{{ item.shoesName }}</td>
+          <td class="p-3">{{ item.quantity }}</td>
+          <td class="p-3">{{ item.supplier }}</td>
+          <td class="p-3">{{ item.importDate }}</td>
+          <td class="p-3">{{ item.brand }}</td>
+          <td class="p-3">
+            <a
+              class="me-3"
+              (click)="getShoe(item, lgModal); $event.stopPropagation()"
+              ><i class="far fa-edit"></i
+            ></a>
+            <a
+              class="text-danger"
+              (click)="deleteShoe(item.id); $event.stopPropagation()"
+              ><i class="fas fa-trash-alt"></i
+            ></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
