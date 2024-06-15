@@ -3,3 +3,9 @@
   max-width: 200px;
   height: auto;
 }
+.search-form button {
+  border: 0;
+  padding: 0;
+  margin-left: -30px;
+  background: none;
+}

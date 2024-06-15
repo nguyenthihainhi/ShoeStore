@@ -49,6 +49,9 @@ export class DataService {
     return this.http.get<Shoe[]>(this.url);
     // return this.shoes;
   }
+  searchShoes(search: string){
+    return this.http.get<Shoe[]>(this.url + `/${search}`);
+  }
   getShoe(id: number){
     return this.http.get<Shoe>( this.url + `/${id}`);
     // return<Shoe> this.shoes.find(shoe => shoe.id === id);

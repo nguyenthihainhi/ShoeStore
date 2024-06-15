@@ -1,7 +1,25 @@
 <div class="container mt-5">
   <div class="row">
+    <h2 class="mb-4">Shoe List</h2>
     <div class="d-flex justify-content-between">
-      <h2>Shoe List</h2>
+      <div class="search-bar w-25">
+        <form
+          class="search-form d-flex align-items-center"
+          (ngSubmit)="onSubmit(search)"
+        >
+          <input
+            class="form-control"
+            type="text"
+            name="query"
+            placeholder="Search"
+            title="Enter search keyword"
+            [(ngModel)]="search"
+          />
+          <button type="submit" title="Search">
+            <i class="fas fa-search text-primary"></i>
+          </button>
+        </form>
+      </div>
       <button class="btn btn-success" (click)="openInformation(lgModal)">
         Create New
       </button>

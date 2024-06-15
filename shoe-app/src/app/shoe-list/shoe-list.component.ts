@@ -21,6 +21,7 @@ export class ShoeListComponent implements OnInit{
   selectedCategory: any;
   editingShoeId: number | null = null; 
   isChangeImage: boolean = false;
+  search: string = '';
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -130,5 +131,11 @@ export class ShoeListComponent implements OnInit{
     this.selectedCategory = '';
     this.selectedSupplier = '';
     this.editingShoeId = null;
+  }
+  onSubmit(search: string) {
+    this.router.navigate(['/shoe'], { queryParams: { search: search } });
+    this.dataService.searchShoes(search).subscribe((shoes: Shoe[]) =>{
+      this.shoes = shoes;
+    });
   }
 }
