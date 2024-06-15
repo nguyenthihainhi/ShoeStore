@@ -17,6 +17,8 @@ export class ShoeDetailComponent implements OnInit{
   noWrap = true;
   slides: string[] = [];
   curImgProduct = '';
+  uniqueColors: string[] = [];
+  uniqueSizes: string[] = [];
   constructor(
     private dataService: DataService, 
     private route: ActivatedRoute,
@@ -37,10 +39,19 @@ export class ShoeDetailComponent implements OnInit{
       ];
       this.curImgProduct = this.slides[0];
     });
+    this.getUniqueColors();
+    this.getUniqueSizes();
   }
 
   changeImage(curImg: string){
     this.curImgProduct = curImg;
   }
-  
+  getUniqueColors() {
+    // Sử dụng Set để loại bỏ các giá trị trùng lặp
+    this.uniqueColors = Array.from(new Set(this.shoe.shoeDetails.map(detail => detail.color)));
+  }
+  getUniqueSizes() {
+    // Sử dụng Set để loại bỏ các giá trị trùng lặp
+    this.uniqueColors = Array.from(new Set(this.shoe.shoeDetails.map(detail => detail.size)));
+  }
 }

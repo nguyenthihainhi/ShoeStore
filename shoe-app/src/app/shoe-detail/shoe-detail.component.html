@@ -47,17 +47,17 @@
         </p>
         <h3 class="fw-light mt-4">Colors</h3>
         <div class="color-wrapper d-flex justify-content-start">
-          <ul *ngFor="let detail of shoe.shoeDetails">
+          <ul *ngFor="let color of uniqueColors">
             <li>
-              <a href="#">{{ detail.color }}</a>
+              <a href="#">{{ color }}</a>
             </li>
           </ul>
         </div>
         <h3 class="fw-light mt-4">Size</h3>
         <div class="size-wrapper d-flex justify-content-start">
-          <ul *ngFor="let detail of shoe.shoeDetails">
+          <ul *ngFor="let size of uniqueSizes">
             <li>
-              <a href="#">{{ detail.size }}</a>
+              <a href="#">{{ size }}</a>
             </li>
           </ul>
         </div>
